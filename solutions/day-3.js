@@ -57,37 +57,23 @@ function commonValues(arr, which) {
   return mcv
 }
 
-function determineO2(arr) {
-  let o2 = arr.slice(),
-      mcv = commonValues(o2, 'mcv'),
+function determine(arr, param) {
+  let vals = arr.slice(),
+      cv = commonValues(vals, param),
       i = 0
 
-  while (o2.length > 1) {
-    o2 = o2.filter(binary => parseInt(binary[i]) === mcv[i])
-    mcv = commonValues(o2, 'mcv')
+  while (vals.length > 1) {
+    vals = vals.filter(binary => parseInt(binary[i]) === cv[i])
+    cv = commonValues(vals, param)
     i++
   }
 
-  return parseInt(o2[0], 2)
-}
-
-function determineCo2(arr) {
-  let co2 = arr.slice(),
-      lcv = commonValues(co2, 'lcv'),
-      i = 0
-
-  while (co2.length > 1) {
-    co2 = co2.filter(binary => parseInt(binary[i]) === lcv[i])
-    lcv = commonValues(co2, 'lcv')
-    i++
-  }
-
-  return parseInt(co2[0], 2)
+  return parseInt(vals[0], 2)
 }
 
 
 function partTwo(arr) {
-  return determineO2(arr) * determineCo2(arr)
+  return determine(arr, 'mcv') * determine(arr, 'lcv')
 }
 
 console.log(partTwo(array))
