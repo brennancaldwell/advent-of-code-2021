@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "touch inputs/day-$npm_config_day.txt && echo \"const fs = require('fs')\n\nconst rawInput = fs.readFileSync('././inputs/day-$npm_config_day.txt', 'utf-8')\n\n\" > solutions/day-$npm_config_day.js",
-    "prob": "node solutions/day-$npm_config_day.js"
+    "gen": "touch inputs/day-$npm_config_d.txt && echo \"const fs = require('fs')\n\nconst rawInput = fs.readFileSync('././inputs/day-$npm_config_d.txt', 'utf-8')\n\n\" > solutions/day-$npm_config_d.js",
+    "prob": "node solutions/day-$npm_config_d.js"
   },
   "repository": {
     "type": "git",
