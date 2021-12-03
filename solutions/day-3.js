@@ -25,11 +25,7 @@ function partOne(arr) {
     epsilon += duple.indexOf(Math.min(...duple))
   })
 
-  console.log(gamma, epsilon)
-
   return parseInt(gamma, 2) * parseInt(epsilon, 2)
-
-
 }
 
 console.log(partOne(array))
