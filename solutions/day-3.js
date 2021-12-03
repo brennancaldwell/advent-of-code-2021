@@ -46,7 +46,7 @@ function commonValues(arr, which) {
     }
   }
 
-  const mcv = bitTracker.map(duple => {
+  const cv = bitTracker.map(duple => {
     const num = which === 'mcv'
     ? Math.max(duple[0] || -Infinity, duple[1] || -Infinity)
     : Math.min(duple[0] || Infinity, duple[1] || Infinity)
@@ -54,7 +54,7 @@ function commonValues(arr, which) {
     else return duple.indexOf(num)
   })
 
-  return mcv
+  return cv
 }
 
 function determine(arr, param) {
