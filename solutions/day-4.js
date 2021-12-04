@@ -27,7 +27,7 @@ function winningBoardCheck(matrix) {
     fullMatrix.forEach(line => {
         if (line.every(val => val === 'x')) winner = true
     })
-    
+
     return winner
 }
 
@@ -38,7 +38,7 @@ function partOne(arr, nums) {
         const currentNum = nums[i]
         current = current.map(matrix => numCalled(matrix, currentNum))
         const check = current.filter(matrix => winningBoardCheck(matrix))
-        if (check.length > 0) {
+        if (check.length === 1) {
             const remainingNums = check[0].flat().filter(val => val !== 'x')
             result = parseInt(currentNum) * remainingNums.reduce((acc, val) => {
                 acc += parseInt(val)
@@ -51,4 +51,34 @@ function partOne(arr, nums) {
     return result
 }
 
-console.log(partOne(boards, nums))
+console.log(`Part One: ${partOne(boards, nums)}`)
+
+
+
+function partTwo(arr, nums) {
+    let result, current = arr, mostRecentWinner = [], winningNum = 0
+
+    for (let i = 0; i < nums.length; i++) {
+
+        const currentNum = nums[i]
+        current = current.map(matrix => numCalled(matrix, currentNum))
+        const winners = current.filter(matrix => winningBoardCheck(matrix))
+        if (winners.length > 0) {
+            winners.forEach(winner => {
+                mostRecentWinner = winner
+                winningNum = currentNum
+                current.splice(current.indexOf(winner), 1)
+            })
+        }
+    }
+
+    return winningNum * mostRecentWinner
+                        .flat()
+                        .filter(val => val !== 'x')
+                        .reduce((acc, val) => {
+                            acc += parseInt(val)
+                            return acc
+                        }, 0)
+}
+
+console.log(`Part Two: ${partTwo(boards, nums)}`)
