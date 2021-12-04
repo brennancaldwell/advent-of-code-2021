@@ -56,7 +56,7 @@ console.log(`Part One: ${partOne(boards, nums)}`)
 
 
 function partTwo(arr, nums) {
-    let result, current = arr, mostRecentWinner = [], winningNum = 0
+    let current = arr, mostRecentWinner = [], winningNum = 0
 
     for (let i = 0; i < nums.length; i++) {
 
