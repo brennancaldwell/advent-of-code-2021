@@ -33,8 +33,8 @@ function calculateMap(arr) {
   // Whatever is in 7 and not 1 is the top bar.
   top = nums[7].split('').filter(val => !nums[1].includes(val))[0]
 
-  // Whatever in 8 that doesn't appear in the top bar or 4 is either botL or bot.
-  // Whichever from above is not in [0, 6, 9] (bar count 6) is botL --  and the number in which it doesn't appear is 9.
+  // Whatever in 8 that doesn't appear in the top bar or 4 is either [botL, bot].
+  // Whichever from [botL, bot] is not in [0, 6, 9] (bar count 6) is botL --  and the number in which it doesn't appear is 9.
   nums[8].split('').filter(val => !`${nums[4]}${top}`.includes(val)).forEach(ltr => {
     if (!barCount[6].every(str => str.includes(ltr))) {
       botL = ltr
