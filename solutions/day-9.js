@@ -47,27 +47,6 @@ function partOne(array) {
 console.log(partOne(array))
 
 
-function lowPoint(array, y, x) {
-  const self = array[y][x]
-
-  const obj = {}
-  if (y - 1 >= 0) obj[`${y - 1},${x}`] = array[y - 1][x]
-  if (y + 1 < array.length) obj[`${y + 1},${[x]}`] = array[y + 1][x]
-  if (x - 1 >= 0) obj[`${y},${x - 1}`] = array[y][x - 1]
-  if (x + 1 < array[y].length) obj[`${y},${x + 1}`] = array[y][x + 1]
-
-  if (Object.values(obj).every(val => val > self)) {
-    return `${y},${x}`
-  } else {
-    const lowest = Math.min(...Object.values(obj))
-    for (let key in obj) {
-      if (obj[key] === lowest) {
-        const [newY, newX] = key.split(',')
-        return lowPoint(array, Number(newY), Number(newX))
-      }
-    }
-  }
-}
 
 function partTwo(array) {
   let lowPoints = {}
