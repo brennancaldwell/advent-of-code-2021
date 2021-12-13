@@ -43,3 +43,39 @@ function findPaths(start, map, lowerCase) {
 }
 
 console.log(findPaths('start', map, lowerCase))
+
+function findPathsTwo(start, map, lowerCase) {
+  let paths = new Set()
+
+  function traverse(start, map, current, lowerCase, twiceVisited) {
+    if (start === 'end') {
+      paths.add(current.join(','))
+      return
+    }
+
+    for (let i = 0; i < map[start].length; i++) {
+      if (!lowerCase.has(map[start][i])) {
+        traverse(map[start][i], map, current.concat(map[start][i]), lowerCase, twiceVisited)
+      } else {
+
+        if (!current.includes(map[start][i])) {
+          traverse(map[start][i], map, current.concat(map[start][i]), lowerCase, twiceVisited)
+
+          if (twiceVisited.length === 0) {
+            traverse(map[start][i], map, current.concat(map[start][i]), lowerCase, twiceVisited.concat(map[start][i]))
+          }
+        }
+
+        if (twiceVisited.length === 1 && twiceVisited[0] === map[start][i]) {
+          traverse(map[start][i], map, current.concat(map[start][i]), lowerCase, twiceVisited.concat(map[start][i]))
+        }
+      }
+    }
+  }
+
+  traverse(start, map, [start], lowerCase, [])
+
+  return paths.size
+}
+
+console.log(findPathsTwo('start', map, lowerCase))
