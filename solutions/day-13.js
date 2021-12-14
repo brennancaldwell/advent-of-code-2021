@@ -51,7 +51,7 @@ function fold(matrix, direction) {
         const newMatrix = []
         for (let r = 0; r < matrix.length; r++) {
             const row = []
-            for (let c = 0; c < matrix[r].length - direction.x; c++) {
+            for (let c = 0; c < direction.x; c++) {
                 let left = matrix[r][direction.x - (c + 1)] ? matrix[r][direction.x - (c + 1)] : '.'
                 let right = matrix[r][direction.x + (c + 1)] ? matrix[r][direction.x + (c + 1)] : '.'
                 if (left === '#' || right === '#') {
@@ -62,7 +62,7 @@ function fold(matrix, direction) {
             }
             newMatrix.push(row)
         }
-        return newMatrix
+        return newMatrix.map(row => row.reverse())
     }
 }
 
