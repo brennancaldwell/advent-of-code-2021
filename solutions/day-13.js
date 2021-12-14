@@ -68,5 +68,12 @@ function fold(matrix, direction) {
 
 const partOne = fold(matrix, {x: 655})
 
-console.log(partOne.flat().filter(val => val === '#').length)
+function partTwo(input, folds, fold) {
+    let matrix = input
+    for (let i = 0; i < folds.length; i++) {
+        matrix = fold(matrix, folds[i])
+    }
+    return matrix
+}
 
+fs.writeFileSync('./day-13-words.txt', JSON.stringify(partTwo(matrix, folds, fold).map(line => line.join('')).join('\n')))
