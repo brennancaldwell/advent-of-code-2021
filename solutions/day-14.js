@@ -39,3 +39,38 @@ function partOne(steps, string, rules) {
 }
 
 console.log(partOne(10, polymer, rules))
+
+function partTwo(steps, polymer, rules) {
+    const pairs = {}, counts = {}
+
+    for (let i = 0; i < polymer.length - 1; i++) {
+        let pair = `${polymer[i]}${polymer[i + 1]}`
+        pairs[pair] = pairs[pair] + 1 || 1
+    }
+
+    for (let key in rules) {
+        if (!pairs[key]) pairs[key] = 0
+    }
+
+    for (let step = 0; step < steps; step ++) {
+        for (const [ pair, count ] of Object.entries(pairs)) {
+            const [ first, second ] = pair.split('')
+            const insert = rules[pair]
+            pairs[`${first}${second}`] -= count
+            pairs[`${first}${insert}`] += count
+            pairs[`${insert}${second}`] += count
+        }
+    }
+
+    for ( const [[sym], n] of Object.entries(pairs)) {
+        counts[sym] = counts[sym] + n || n
+    }
+
+    counts[polymer[polymer.length - 1]]++
+
+    const sort = Object.values(counts).sort((a, b) => b - a)
+
+    return sort[0] - sort[sort.length - 1]
+}
+
+console.log(partTwo(40, polymer, rules))
